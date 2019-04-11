@@ -1,0 +1,80 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/edit_name"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    android:background="#555555"
+    android:padding="10dp">
+    
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@color/DialogFragmentText"
+        android:text="@string/text_create_category_greeting"
+        android:gravity="center"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColorHint="@color/DialogFragmentTextHint"
+        android:hint="@string/hint_category_name"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textColor="@color/DialogFragmentText"
+        android:gravity="center"
+        android:text="@string/text_create_category_assign_color"/>
+
+    <com.flask.colorpicker.ColorPickerView
+        android:id="@+id/color_picker_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:density="12"
+        app:lightnessSlider="true"
+        app:wheelType="CIRCLE"
+        app:lightnessSliderView="@+id/v_lightness_slider"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:textColor="@color/DialogFragmentText"
+        android:text="@string/text_create_category_lightness"/>
+
+    <com.flask.colorpicker.slider.LightnessSlider
+        android:id="@+id/v_lightness_slider"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/button_create"
+            android:layout_alignParentLeft="true"
+            android:background="@color/deletionButton"
+            android:id="@+id/button_confirm_category_creation"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/button_cancel"
+            android:layout_alignParentRight="true"
+            android:background="@color/neutralButton"
+            android:id="@+id/button_dismiss_category_creation"/>
+
+    </RelativeLayout>
+</LinearLayout>

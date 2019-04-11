@@ -1,0 +1,48 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/edit_name"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textColor="@color/DialogFragmentTitle"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:text="@string/confirm_category_deletion" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/confirm_category_quests_deletion"
+        android:id="@+id/checkbox_delete_category_quests"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/button_yes"
+            android:layout_alignParentLeft="true"
+            android:background="@color/deletionButton"
+            android:id="@+id/button_confirm_category_deletion"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/button_no"
+            android:layout_alignParentRight="true"
+            android:background="@color/neutralButton"
+            android:id="@+id/button_dismiss_category_deletion"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

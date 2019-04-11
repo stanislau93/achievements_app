@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Achievements</string>
+    <string name="button_no">No</string>
+    <string name="button_yes">Yes</string>
+    <string name="button_create">Create</string>
+    <string name="button_cancel">Cancel</string>
+    <string name="hint_category_name">Category name</string>
+    <string name="text_create_category_greeting">Create a new category!</string>
+    <string name="text_create_category_lightness">Adjust lightness</string>
+    <string name="text_create_category_assign_color">Choose a color for the new category</string>
+    <string name="confirm_category_deletion">Are you sure you want to delete the category?</string>
+    <string name="confirm_category_quests_deletion">Also delete all the quests that belong to the category? (Otherwise they will become unassigned).</string>
+</resources>

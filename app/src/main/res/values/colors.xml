@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#d6bea5</color>
+    <color name="colorPrimaryDark">#a39189</color>
+    <color name="colorAccent">#D81B60</color>
+
+    <color name="appBackgroundColor">#444e55</color>
+
+    <color name="deletionButton">#AB4433</color>
+    <color name="neutralButton">#887788</color>
+
+    <color name="DialogFragmentTitle">#111132</color>
+
+    <color name="DialogFragmentText">#FFFFFF</color>
+    <color name="DialogFragmentTextHint">#BBBBBB</color>
+</resources>
