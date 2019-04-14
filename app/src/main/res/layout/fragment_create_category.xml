@@ -22,6 +22,7 @@
         android:layout_height="wrap_content"
         android:textColorHint="@color/DialogFragmentTextHint"
         android:hint="@string/hint_category_name"
+        android:id="@+id/category_creation_name"
         />
 
     <TextView

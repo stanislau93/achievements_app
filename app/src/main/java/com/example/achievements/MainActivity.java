@@ -1,7 +1,10 @@
 package com.example.achievements;
 
 import android.database.Cursor;
+import android.graphics.drawable.ColorDrawable;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.Toolbar;
 
 import com.example.achievements.adapters.CategoriesAdapter;
 import com.example.achievements.data.AppDatabase;
@@ -16,6 +20,7 @@ import com.example.achievements.data.Category;
 import com.example.achievements.fragments.CreateCategoryDialogFragment;
 import com.example.achievements.fragments.DeleteCategoryConfirmationFragment;
 
+import java.security.InvalidParameterException;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -62,7 +67,9 @@ public class MainActivity extends AppCompatActivity {
         View.OnClickListener deletionClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openCategoryDeletionDialog(v.getId());
+                Bundle bundle = new Bundle();
+                bundle.putLong("category_id", v.getId());
+                openDialog("delete_cat", bundle);
             }
         };
 
@@ -71,6 +78,8 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         setAddCategoryButtonListener();
+
+        setActionBar();
     }
 
     protected ArrayList<Category> getCategoriesDataset()
@@ -98,40 +107,41 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openCategoryCreationDialog();
+                openDialog("create_cat", new Bundle());
             }
         });
     }
 
-    //Todo - overwrite, DRY!
-    protected void openCategoryCreationDialog() {
+    private void openDialog(String type, Bundle bundle) {
         android.support.v4.app.FragmentManager manager = getSupportFragmentManager();
-
-        Fragment oldFragment = manager.findFragmentByTag("fragment_create_category");
+        Fragment oldFragment = manager.findFragmentByTag(type);
 
         if (oldFragment != null) {
             manager.beginTransaction().remove(oldFragment).commit();
         }
 
-        CreateCategoryDialogFragment fragment = new CreateCategoryDialogFragment();
-        fragment.show(manager, "fragment_create_category");
-    }
-
-    protected void openCategoryDeletionDialog(long categoryID) {
-        android.support.v4.app.FragmentManager manager = getSupportFragmentManager();
-
-        Fragment oldFragment = manager.findFragmentByTag("fragment_confirm_category_deletion");
-
-        if (oldFragment != null) {
-            manager.beginTransaction().remove(oldFragment).commit();
+        switch (type) {
+            case "delete_cat":
+                DeleteCategoryConfirmationFragment fragment = new DeleteCategoryConfirmationFragment();
+                fragment.setArguments(bundle);
+                fragment.show(manager, type);
+                break;
+            case "create_cat":
+                (new CreateCategoryDialogFragment()).show(manager, type);
+                break;
+            default:
+                throw new InvalidParameterException("Unsupported fragment type!");
         }
-
-        DeleteCategoryConfirmationFragment fragment = new DeleteCategoryConfirmationFragment();
-
-        Bundle bundle = new Bundle();
-        bundle.putLong("category_id", categoryID);
-        fragment.setArguments(bundle);
-
-        fragment.show(manager, "fragment_confirm_category_deletion");
     }
+
+    public void setActionBar() {
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setHomeButtonEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(false);
+        actionBar.setDisplayShowHomeEnabled(false);
+        actionBar.setTitle(getResources().getString(R.string.categories_appbar_title));
+        actionBar.hide();
+        //actionBar.show();
+    }
+
 }

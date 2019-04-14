@@ -7,7 +7,7 @@ import android.arch.persistence.room.Entity;
 
 @Entity(tableName = Category.TABLE_NAME, indices = {@Index(value = "title", unique = true)})
 public class Category {
-    public static final String TABLE_NAME = "categories";
+    static final String TABLE_NAME = "categories";
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(index = true, name = "id")
