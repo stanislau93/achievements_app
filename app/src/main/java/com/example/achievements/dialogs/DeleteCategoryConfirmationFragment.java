@@ -1,4 +1,4 @@
-package com.example.achievements.fragments;
+package com.example.achievements.dialogs;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,7 +12,7 @@ import android.widget.Button;
 import com.example.achievements.R;
 import com.example.achievements.data.AppDatabase;
 
-public class DeleteCategoryConfirmationFragment extends DialogFragment {
+public class DeleteCategoryConfirmationFragment extends BaseDialogFragment {
 
     private AppDatabase db;
 
@@ -34,8 +34,7 @@ public class DeleteCategoryConfirmationFragment extends DialogFragment {
                 db.setTransactionSuccessful();
                 db.endTransaction();
 
-                getActivity().finish();
-                startActivity(getActivity().getIntent());
+                dismiss();
             }
         });
 

@@ -1,24 +1,20 @@
-package com.example.achievements.fragments;
+package com.example.achievements.dialogs;
 
-import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.DialogFragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.example.achievements.R;
 import com.example.achievements.data.AppDatabase;
 import com.example.achievements.data.Category;
 import com.flask.colorpicker.ColorPickerView;
 
-public class CreateCategoryDialogFragment extends DialogFragment {
+public class CreateCategoryDialogFragment extends BaseDialogFragment {
 
     final int EXP_REQ_FOR_SECOND_LVL = 1000;
 
@@ -34,6 +30,8 @@ public class CreateCategoryDialogFragment extends DialogFragment {
 
         Button submitButton = dialogView.findViewById(R.id.button_confirm_category_creation);
         Button cancelButton = dialogView.findViewById(R.id.button_dismiss_category_creation);
+
+        final String parentTagID = getArguments().getString("parent_fragment_tag");
 
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,10 +49,7 @@ public class CreateCategoryDialogFragment extends DialogFragment {
 
                 storeCategory(cat);
 
-                Log.d("DEBUG", String.format("#%06X", (0xFFFFFF & pickedColor)));
-
-                getActivity().finish();
-                startActivity(getActivity().getIntent());
+                dismiss();
             }
         });
 
@@ -74,4 +69,5 @@ public class CreateCategoryDialogFragment extends DialogFragment {
         db.setTransactionSuccessful();
         db.endTransaction();
     }
+
 }
