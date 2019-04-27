@@ -19,11 +19,10 @@ public abstract class AppDatabase extends RoomDatabase {
     @SuppressWarnings("WeakerAccess")
     public abstract CategoryDao category();
 
-    private static final Category[] PREPOPULATE_DATA = {
-            new Category() {{title="cat1"; experience=500; experienceRequired=1000; color="#BB3333"; level=3;}},
-            new Category() {{title="cat2"; experience=700; experienceRequired=1000; color="#44AA22"; level=10;}},
-            new Category() {{title="cat3"; experience=300; experienceRequired=1000; color="#3344BB"; level=5;}}
-    };
+    /**
+     * @return The DAO for the `quests` table.
+     */
+    public abstract QuestDao quest();
 
     /**
      * @param context The context.

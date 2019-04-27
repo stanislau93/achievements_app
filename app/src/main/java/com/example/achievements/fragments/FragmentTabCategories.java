@@ -44,9 +44,6 @@ public class FragmentTabCategories extends Fragment {
         );
 
         initializeFields();
-
-        insertFixtureDataset();
-
         loadCategoryList();
 
         return fragment_view;
@@ -59,22 +56,6 @@ public class FragmentTabCategories extends Fragment {
         recyclerView = fragment_view.findViewById(R.id.rec_view_categories);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(activity);
-    }
-
-    /*TODO - remove*/
-    private void insertFixtureDataset()
-    {
-        Category[] testDataset = {
-                new Category() {{title="cat1"; experience=500; experienceRequired=1000; color="#BB3333"; level=3;}},
-                new Category() {{title="cat2"; experience=700; experienceRequired=1000; color="#44AA22"; level=10;}},
-                new Category() {{title="cat3"; experience=300; experienceRequired=1000; color="#3344BB"; level=5;}}
-        };
-
-        Cursor cc = db.category().selectAll();
-
-        if (!cc.moveToNext()) {
-            db.category().insertMany(testDataset);
-        }
     }
 
     protected ArrayList<Category> getCategoriesDataset()
