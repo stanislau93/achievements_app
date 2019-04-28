@@ -8,7 +8,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.VisibleForTesting;
 
-@Database(entities = {Category.class,}, version = 1, exportSchema = false)
+@Database(entities = {Category.class, Quest.class}, version = 2, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static AppDatabase instance;
@@ -39,7 +39,7 @@ public abstract class AppDatabase extends RoomDatabase {
                         }
                     })
                     .allowMainThreadQueries()
-                    //.fallbackToDestructiveMigration()
+                    .fallbackToDestructiveMigration()
                     .build();
         }
         return instance;

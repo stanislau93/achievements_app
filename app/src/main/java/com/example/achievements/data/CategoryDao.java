@@ -10,6 +10,9 @@ public abstract class CategoryDao {
     @Query("SELECT * FROM " + Category.TABLE_NAME)
     public abstract Cursor selectAll();
 
+    @Query("SELECT color FROM " + Category.TABLE_NAME + " WHERE id = :id")
+    public abstract String selectColorById(long id);
+
     @Insert()
     public abstract long insert(Category object);
 

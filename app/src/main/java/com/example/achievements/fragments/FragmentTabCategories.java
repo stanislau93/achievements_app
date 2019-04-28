@@ -58,25 +58,6 @@ public class FragmentTabCategories extends Fragment {
         layoutManager = new LinearLayoutManager(activity);
     }
 
-    protected ArrayList<Category> getCategoriesDataset()
-    {
-        final Cursor catsCursor = db.category().selectAll();
-        final ArrayList<Category> categories = new ArrayList<>();
-
-        while (catsCursor.moveToNext()) {
-            categories.add(new Category(){{
-                title = catsCursor.getString(catsCursor.getColumnIndex("title"));
-                id = catsCursor.getLong(catsCursor.getColumnIndex("id"));
-                experience = catsCursor.getInt(catsCursor.getColumnIndex("experience"));
-                experienceRequired = catsCursor.getInt(catsCursor.getColumnIndex("experience_required"));
-                color = catsCursor.getString(catsCursor.getColumnIndex("color"));
-                level = catsCursor.getInt(catsCursor.getColumnIndex("level"));
-            }});
-        }
-
-        return categories;
-    }
-
     protected void setAddCategoryButtonListener()
     {
         ImageButton button = fragment_view.findViewById(R.id.createCategory);
@@ -146,4 +127,22 @@ public class FragmentTabCategories extends Fragment {
         setAddCategoryButtonListener();
     }
 
+    protected ArrayList<Category> getCategoriesDataset()
+    {
+        final Cursor catsCursor = db.category().selectAll();
+        final ArrayList<Category> categories = new ArrayList<>();
+
+        while (catsCursor.moveToNext()) {
+            categories.add(new Category(){{
+                title = catsCursor.getString(catsCursor.getColumnIndex("title"));
+                id = catsCursor.getLong(catsCursor.getColumnIndex("id"));
+                experience = catsCursor.getInt(catsCursor.getColumnIndex("experience"));
+                experienceRequired = catsCursor.getInt(catsCursor.getColumnIndex("experience_required"));
+                color = catsCursor.getString(catsCursor.getColumnIndex("color"));
+                level = catsCursor.getInt(catsCursor.getColumnIndex("level"));
+            }});
+        }
+
+        return categories;
+    }
 }

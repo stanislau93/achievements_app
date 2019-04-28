@@ -7,25 +7,10 @@
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/rec_view_quests_1"
+        android:id="@+id/rec_view_quests"
         android:scrollbars="vertical"
-        android:layout_marginTop="10dp"
         android:layout_alignParentTop="true"
-        android:layout_toLeftOf="@+id/rec_view_quests_2"
-        android:layout_above="@+id/createQuest"
-        android:layout_marginBottom="10dp">
-
-    </android.support.v7.widget.RecyclerView>
-
-    <android.support.v7.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/rec_view_quests_2"
-        android:scrollbars="vertical"
-        android:layout_marginTop="10dp"
-        android:layout_alignParentTop="true"
-        android:layout_above="@+id/createQuest"
-        android:layout_marginBottom="10dp">
+        android:layout_above="@+id/createQuest">
 
     </android.support.v7.widget.RecyclerView>
 
@@ -35,6 +20,7 @@
         android:src="@drawable/plus"
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="20dp"
         android:id="@+id/createQuest"
         android:onClick="createQuest"/>
