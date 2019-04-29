@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="rec_view_margin_top">7dp</dimen>
+    <dimen name="rec_view_item_padding">2dp</dimen>
+    <dimen name="rec_view_item_icons">32dp</dimen>
+
+    <dimen name="category_list_padding">8dp</dimen>
+
     <dimen name="quest_list_item_height">70dp</dimen>
     <dimen name="quest_list_item_padding">2dp</dimen>
-    <dimen name="quest_list_item_sub_padding">8dp</dimen>
+    <dimen name="quest_list_item_sub_padding">6dp</dimen>
+
+    <dimen name="category_list_item_title">24sp</dimen>
+
+    <dimen name="quest_list_item_title">18sp</dimen>
 </resources>

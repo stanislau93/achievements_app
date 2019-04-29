@@ -1,10 +1,12 @@
 package com.example.achievements.fragments;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,7 +19,11 @@ import com.example.achievements.adapters.QuestsAdapter;
 import com.example.achievements.data.AppDatabase;
 import com.example.achievements.data.Category;
 import com.example.achievements.data.Quest;
+import com.example.achievements.dialogs.CreateCategoryDialogFragment;
+import com.example.achievements.dialogs.DeleteCategoryConfirmationFragment;
+import com.example.achievements.dialogs.DeleteQuestConfirmationFragment;
 
+import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -53,9 +59,52 @@ public class FragmentTabQuests extends Fragment {
     {
         ArrayList<Quest> dataset = getQuestsDataset();
 
-        adapter = new QuestsAdapter(dataset, db);
+        View.OnClickListener deletionClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putLong("quest_id", v.getId());
+                openDialog("delete_quest", bundle);
+            }
+        };
+
+        adapter = new QuestsAdapter(dataset, db, deletionClickListener);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
+    }
+
+    private void openDialog(String type, Bundle bundle) {
+        android.support.v4.app.FragmentManager manager = getActivity().getSupportFragmentManager();
+        Fragment oldFragment = manager.findFragmentByTag(type);
+        DialogFragment fragment;
+
+        if (oldFragment != null) {
+            manager.beginTransaction().remove(oldFragment).commit();
+        }
+
+        DialogInterface.OnDismissListener onDismissListener = new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                loadQuestsList();
+            }
+        };
+
+        switch (type) {
+            case "delete_quest":
+                fragment = new DeleteQuestConfirmationFragment();
+                fragment.setArguments(bundle);
+                fragment.show(manager, type);
+                ((DeleteQuestConfirmationFragment) fragment).setOnDismissListener(onDismissListener);
+                break;
+            /*case "create_quest":
+                fragment = new CreateCategoryDialogFragment();
+                fragment.setArguments(bundle);
+                fragment.show(manager, type);
+                ((CreateCategoryDialogFragment) fragment).setOnDismissListener(onDismissListener);
+                break;*/
+            default:
+                throw new InvalidParameterException("Unsupported fragment type!");
+        }
     }
 
     protected ArrayList<Quest> getQuestsDataset()
@@ -82,15 +131,20 @@ public class FragmentTabQuests extends Fragment {
     /*TODO - remove*/
     private void insertFixtureDataset()
     {
+        db.quest().deleteById(1);
+        db.quest().deleteById(2);
+        db.quest().deleteById(3);
+        db.category().deleteById(1);
+        db.category().deleteById(2);
         Category[] test_cat_dataset = {
-                new Category() {{ id=1; title="test1"; color="#AA2323"; }},
-                new Category() {{ id=2; title="test2"; color="#4422BA"; }}
+                new Category() {{ id=1; title="Кулинария"; color="#AA2323"; }},
+                new Category() {{ id=2; title="Спорт"; color="#4422BA"; }}
         };
 
         Quest[] test_dataset = {
-                new Quest() {{ id=1; title="quest1"; description="easy"; difficulty=0; status=0; reward="pony"; deadline=(new Date());categoryID=1;}},
-                new Quest() {{ id=2; title="quest2"; description="normal"; difficulty=1; status=1; reward="wendy"; deadline=(new Date());categoryID=2;}},
-                new Quest() {{ id=3; title="quest3"; description="hard"; difficulty=2; status=2; reward="candy"; deadline=(new Date());categoryID=1;}}
+                new Quest() {{ id=1; title="Приготовить лазанью"; description="easy"; difficulty=0; status=0; reward="2 часа игр"; deadline=(new Date());categoryID=1;}},
+                new Quest() {{ id=2; title="40 отжиманий за раз"; description="normal"; difficulty=1; status=1; reward="завтрак в кафе"; deadline=(new Date());categoryID=2;}},
+                new Quest() {{ id=3; title="Замесить тесто"; description="hard"; difficulty=2; status=2; reward="Купить чипсов"; deadline=(new Date());categoryID=1;}}
         };
 
         Cursor cc = db.category().selectAll();

@@ -11,4 +11,5 @@
     <string name="text_create_category_assign_color">Choose a color for the new category</string>
     <string name="confirm_category_deletion">Are you sure you want to delete the category?</string>
     <string name="confirm_category_quests_deletion">Also delete all the quests that belong to the category? (Otherwise they will become unassigned).</string>
+    <string name="confirm_quest_deletion">Are you sure you want to remove the quest?</string>
 </resources>

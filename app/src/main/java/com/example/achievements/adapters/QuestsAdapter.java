@@ -1,13 +1,15 @@
 package com.example.achievements.adapters;
 
 import android.graphics.Color;
+import android.media.Image;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.achievements.R;
@@ -20,7 +22,9 @@ public class QuestsAdapter extends RecyclerView.Adapter<QuestsAdapter.QuestsView
     private ArrayList<Quest[]> dataset;
     private AppDatabase db;
 
-    public QuestsAdapter(ArrayList<Quest> dataset, AppDatabase db) {
+    private View.OnClickListener deletionClickListener;
+
+    public QuestsAdapter(ArrayList<Quest> dataset, AppDatabase db, View.OnClickListener deletionClickListener) {
         this.db = db;
         this.dataset = new ArrayList<>();
         Quest[] row = new Quest[2];
@@ -39,6 +43,8 @@ public class QuestsAdapter extends RecyclerView.Adapter<QuestsAdapter.QuestsView
 
             }
         }
+
+        this.deletionClickListener = deletionClickListener;
     }
 
     public static class QuestsViewHolder extends RecyclerView.ViewHolder {
@@ -71,8 +77,8 @@ public class QuestsAdapter extends RecyclerView.Adapter<QuestsAdapter.QuestsView
 
         String color1 = db.category().selectColorById(categoryID1);
 
-        LinearLayout sublayout1 = viewHolder.layout.findViewById(R.id.rec_view_quests_sub_1);
-        LinearLayout sublayout2 = viewHolder.layout.findViewById(R.id.rec_view_quests_sub_2);
+        RelativeLayout sublayout1 = viewHolder.layout.findViewById(R.id.rec_view_quests_sub_1);
+        RelativeLayout sublayout2 = viewHolder.layout.findViewById(R.id.rec_view_quests_sub_2);
 
         titleSub1.setText(title);
 
@@ -86,10 +92,23 @@ public class QuestsAdapter extends RecyclerView.Adapter<QuestsAdapter.QuestsView
             String color2 = db.category().selectColorById(categoryID2);
 
             sublayout2.setBackgroundColor(Color.parseColor(color2));
+
+            ImageButton deleteQuestButton2 = sublayout2.findViewById(R.id.removeQuest_sub_2);
+            ImageButton editQuestButton2 = sublayout2.findViewById(R.id.editQuest_sub_2);
+            deleteQuestButton2.setId((int)row[1].id);
+            deleteQuestButton2.setOnClickListener(deletionClickListener);
+            deleteQuestButton2.setBackgroundColor(Color.parseColor(color2));
+            editQuestButton2.setBackgroundColor(Color.parseColor(color2));
         } else {
             sublayout2.setVisibility(View.INVISIBLE);
         }
 
+        ImageButton deleteQuestButton1 = sublayout1.findViewById(R.id.removeQuest_sub_1);
+        ImageButton editQuestButton1 = sublayout1.findViewById(R.id.editQuest_sub_1);
+        deleteQuestButton1.setId((int)row[0].id);
+        deleteQuestButton1.setOnClickListener(deletionClickListener);
+        deleteQuestButton1.setBackgroundColor(Color.parseColor(color1));
+        editQuestButton1.setBackgroundColor(Color.parseColor(color1));
     }
 
 

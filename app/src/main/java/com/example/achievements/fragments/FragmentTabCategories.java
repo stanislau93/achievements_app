@@ -39,10 +39,6 @@ public class FragmentTabCategories extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         fragment_view = inflater.inflate(R.layout.fragment_tab_categories, container, false);
 
-        fragment_view.findViewById(R.id.main_screen).setBackgroundColor(
-                getResources().getColor(R.color.appBackgroundColor)
-        );
-
         initializeFields();
         loadCategoryList();
 

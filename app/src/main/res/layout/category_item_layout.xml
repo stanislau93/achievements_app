@@ -6,12 +6,11 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_marginBottom="2dp"
-    android:layout_marginTop="2dp"
-    android:padding="10dp">
+    android:padding="@dimen/category_list_padding">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <TextView
@@ -24,11 +23,12 @@
             android:textStyle="bold"/>
 
         <ImageButton
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="@dimen/rec_view_item_icons"
+            android:layout_height="@dimen/rec_view_item_icons"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:src="@drawable/bucket"
+            android:background="@color/appBackgroundColor"
+            android:src="@drawable/deletion_cross"
             android:id="@+id/removeCategory"/>
     </RelativeLayout>
 
@@ -43,8 +43,8 @@
 
             <ImageView
                 android:id="@+id/imageview_star"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="@dimen/rec_view_item_icons"
+                android:layout_height="@dimen/rec_view_item_icons"
                 android:src="@drawable/star"
                 android:layout_alignParentLeft="true"/>
 
